@@ -1,0 +1,14 @@
+# Ignore Python virtual environments
+venv/
+.env
+
+# Byte-compiled / cache files
+__pycache__/
+*.py[cod]
+*.pyc
+
+# VSCode settings (optional)
+.vscode/
+
+# Mac system files (optional)
+.DS_Store
