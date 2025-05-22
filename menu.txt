@@ -1,0 +1,32 @@
+RESTAURANT NAME:
+Sakura Ramen House
+
+MENU:
+
+🍜 Spicy Tonkotsu Ramen - $13  
+Rich pork broth with chili oil, sliced pork belly, soft-boiled egg, bamboo shoots, and green onion.  
+
+🍜 Vegan Miso Ramen - $12  
+Miso-based broth with tofu, mushrooms, baby bok choy, corn, and sesame oil. 100% plant-based.
+
+🍜 Shoyu Ramen - $12  
+Soy-based clear broth with chicken, nori, and scallions.
+
+🍙 Onigiri (2 pcs) - $5  
+Grilled rice balls with plum, salmon, or kombu filling.
+
+🥟 Gyoza - $6  
+Pan-fried pork dumplings served with soy dipping sauce.
+
+🍵 Matcha Latte - $5  
+Japanese green tea latte. Available hot or iced.
+
+🥤 Soft Drinks - $2  
+Coke, Sprite, Iced Tea.
+
+POLICIES:
+
+- Gluten-free noodles available upon request (except Shoyu Ramen).
+- Kitchen closes at 9:00 PM daily.
+- We do not accept reservations.
+- Vegan options are clearly marked.

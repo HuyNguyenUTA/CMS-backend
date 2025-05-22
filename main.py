@@ -28,21 +28,42 @@ async def chat(payload: ChatPayload):
     try:
         client = openai.OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
+        # ✅ Load real restaurant menu
+        with open("menu.txt", "r") as f:
+            menu_text = f.read()
+
+        system_prompt = f"""
+        You are Sakura, a friendly and helpful assistant at a ramen restaurant.
+
+        Here is the full menu and restaurant information:
+        {menu_text}
+
+        Your job is to:
+        - Answer customer questions clearly and politely.
+        - If the customer asks to place an order, do NOT confirm it right away.
+        - Instead, respond with a message that summarizes the order and include a `pending_order` field.
+        - Only include an `order` field after the customer explicitly confirms (e.g. they say "yes", "confirm", or "submit").
+
+        Always reply in JSON format like:
+        {{ "reply": "...", "pending_order": [{{"item": "...", "quantity": 1}}] }}
+
+        When confirmed, respond like:
+        {{ "reply": "...", "order": [{{"item": "...", "quantity": 1}}] }}
+
+        If the user is just chatting or asking questions, respond with:
+        {{ "reply": "..." }}
+
+        Avoid hallucinating items. Only use menu items listed above.
+        """
+
         response = client.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=[
-                {"role": "system", "content": (
-                    "You are Sakura, a friendly restaurant assistant. "
-                    "Always respond in JSON format like: "
-                    "{\"reply\": \"Your message here.\", \"order\": [...] (optional)}. "
-                    "Only include the 'order' field if the user places an order. "
-                    "Otherwise just provide a reply message."
-                )
-},
+                {"role": "system", "content": system_prompt},
                 *payload.messages
             ],
             temperature=0.7,
-            max_tokens=200,
+            max_tokens=300,
         )
 
         content = response.choices[0].message.content
