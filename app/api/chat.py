@@ -4,6 +4,6 @@ from app.services.chatbot import generate_chat_response
 
 router = APIRouter()
 
-@router.post("/")
+@router.post("")
 async def chat(payload: ChatPayload):
     return await generate_chat_response(payload)

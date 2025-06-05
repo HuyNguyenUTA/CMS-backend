@@ -3,7 +3,7 @@ from app.models.order import OrderPayload
 
 router = APIRouter()
 
-@router.post("/")
+@router.post("")
 async def submit_order(order: OrderPayload):
     print("📦 Order received:", order)
 
