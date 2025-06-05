@@ -6,9 +6,8 @@ from app.models.chat import ChatPayload
 from app.core.config import settings
 from app.services.rag import retrieve_from_qdrant
 
-openai_client = OpenAI(api_key=settings.OPENAI_API_KEY)
-
 async def generate_chat_response(payload: ChatPayload, restaurant_id="sakura-ramen"):
+    print("📥 Received chat payload:", payload)
     try:
         context = retrieve_from_qdrant(restaurant_id, payload.messages[-1].content)
 
@@ -28,7 +27,9 @@ async def generate_chat_response(payload: ChatPayload, restaurant_id="sakura-ram
         {{ "reply": "...", "order": [{{"item": "...", "quantity": 1}}] }}
         {{ "reply": "..." }}
         """
-
+        
+        openai_client = OpenAI(api_key=settings.OPENAI_API_KEY)
+        print("🔗 Connecting to OpenAI API...")
         response = openai_client.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=[
@@ -38,6 +39,7 @@ async def generate_chat_response(payload: ChatPayload, restaurant_id="sakura-ram
             temperature=0.7,
             max_tokens=300,
         )
+        print("✅ Got response from OpenAI")
 
         content = response.choices[0].message.content
         return json.loads(content) if content.startswith("{") else {"reply": content}
